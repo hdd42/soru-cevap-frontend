@@ -1,0 +1,13 @@
+<tabset [justified]="true">
+  <div class="card">
+    <h4 class="card-header">Populer Kategoriler</h4>
+    <div class="card-block">
+      <ul class="nav flex-column">
+        <li class="nav-item" *ngFor="let cat of categories">
+          <a class="nav-link active" href="" routerLink="/categories/{{cat.slug}}/questions">{{cat.name}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</tabset>

@@ -1,0 +1,37 @@
+<div class="row">
+
+  <div class="col-md-8 offset-4" style="margin-top: 18px ; margin-bottom: 10px">
+    <app-search-global></app-search-global>
+  </div>
+  <div class="col-md-9">
+    <tabset #homeTab>
+      <tab heading="En Yeni Sorular" style="margin-top: 5px ;">
+
+        <app-question-list [questions]="newQuestions"></app-question-list>
+
+      </tab>
+      <tab heading="En Populer">
+
+        <app-question-list [questions]="popularQuestions"></app-question-list>
+
+      </tab>
+      <tab heading="Hic Cevap Alamayanlar">
+        <app-question-list [questions]="noAnswerQuestions"></app-question-list>
+
+
+      </tab>
+
+      <tab heading="+ Soru Sor">
+
+      <app-question></app-question>
+
+      </tab>
+    </tabset>
+  </div>
+
+  <div class="col-md-3" style="margin-top: 45px">
+    <app-category-menu></app-category-menu>
+  </div>
+</div>
+
+

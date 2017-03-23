@@ -1,0 +1,20 @@
+<div style="margin-top: 5px" class="card">
+  <div class="card-header">
+  <app-question-header [question]="question" [short]="'true'"></app-question-header>
+
+  </div>
+  <div class="card-block">
+    <a href="" routerLink="/questions/{{question.slug}}">
+      <h4 class="card-title">{{question.title}} </h4>
+    </a>
+
+  </div>
+
+  <div class="card-footer text-muted">
+
+<app-question-footer [question]="question" [short]="'true'">
+
+</app-question-footer>
+
+  </div>
+</div>

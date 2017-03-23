@@ -1,0 +1,31 @@
+<strong>Ahmet Korkmaz </strong>
+
+
+<div class="float-md-right">
+
+      <span *ngIf="question?.solved.status" class="btn btn-outline-success btn-sm">
+        <span class="badge badge-pill badge-success">
+         <i class="fa fa-check-circle-o fa-2x"></i>
+        </span>
+
+        <strong> Ahmet Korkmaz tarafindan Cozuldu! </strong>
+      </span>
+  <a href="" class="btn btn-sm"
+     popover="Facebook da paylas!"
+     triggers="mouseenter:mouseleave">
+    <i class="fa fa-facebook-f"></i> Face
+  </a>
+  <a href="" class="btn btn-sm"
+     popover="Twitter de paylas!"
+     triggers="mouseenter:mouseleave">
+    <i class="fa fa-twitter"></i>
+    Twitter
+  </a>
+
+  <a *ngIf="!short" href="" (click)="openAnswerModal($event)" class="btn btn-sm btn-info">
+    <i class="fa fa-commenting-o "></i>
+    Cevap Ver</a>
+  <a *ngFor="let cat of question?.categories" routerLink="/categories/{{cat.slug}}/questions"
+     class="badge badge-default badge-pill">{{cat.name}}</a>
+
+</div>

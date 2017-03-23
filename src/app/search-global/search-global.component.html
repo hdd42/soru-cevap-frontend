@@ -1,0 +1,55 @@
+<div class="row">
+  <div class="col-md-12" style="margin-bottom: 10px">
+    <form novalidate [formGroup]="searchForm" (ngSubmit)="searchAll()">
+      <div class="input-group">
+        <span *ngIf="leftName" class="input-group-addon bg-aqua">{{leftName}} sorularinda ara</span>
+        <span *ngIf="!leftName" class="input-group-addon bg-aqua">Tum kategoriler icinde ara</span>
+        <span *ngIf="typeaheadLoading===true" class="input-group-addon bg-aqua">
+           <i class="fa fa-refresh ng-hide" style=""></i>
+        </span>
+
+        <input formControlName="search"
+               [typeahead]="questions"
+               typeaheadOptionsLimit="7"
+               (typeaheadLoading)="changeTypeaheadLoading($event)"
+               (typeaheadNoResults)="changeTypeaheadNoResults($event)"
+               [typeaheadItemTemplate]="customItemTemplate"
+               placeholder="java mysql C#..."
+               (typeaheadOnSelect)="typeaheadOnSelect($event)"
+               class="form-control">
+
+
+
+
+        <span class="input-group-btn">
+        <button class="btn btn-secondary" type="button">
+          <i class="fa fa-search"></i>
+          Ara!</button>
+      </span>
+      </div>
+    </form>
+
+
+    <div *ngIf="typeaheadNoResults===true"  style="">
+      <hr>
+
+     <span class="badge badge-warning">
+        <i class="fa fa-exclamation-triangle fa-2x"></i>
+       hizli aramada eslesme bulunamadi , genis arama icin ara yi tiklayin
+     </span>
+    </div>
+
+
+
+  </div>
+</div>
+
+
+<template #customItemTemplate let-model="item" let-index="index" class="btn-outline-secondary" >
+  <strong>
+    <a href="" routerLink="/questions/{{model.slug}}" class="btn-outline-secondary" >
+    {{model.title}}
+  </a> <i class="fa fa-arrow-right"></i>
+  </strong>
+
+</template>

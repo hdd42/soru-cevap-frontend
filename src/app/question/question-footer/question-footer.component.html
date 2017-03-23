@@ -1,0 +1,46 @@
+{{question?.createdAt|date:'medium'}}
+<div class="float-md-right">
+
+
+  <a href="" (click)="upVote($event)" class="btn  btn-sm "
+          popover="Soruyu Sende Begen"
+          triggers="mouseenter:mouseleave"
+  >
+    <i class="fa fa-thumbs-up"></i>
+
+    <span class="badge badge-pill badge-success">
+      {{question?.votesCount?.upVote}}
+    </span>
+  </a>
+
+  <a href="" (click)="downVote($event)" class="btn btn-sm"
+          popover="Bencede kotu bir soru!"
+          triggers="mouseenter:mouseleave"
+  >
+    <i class="fa fa-thumbs-down "></i>
+
+    <span class="badge badge-pill badge-danger">
+      {{question?.votesCount?.downVote}}
+    </span>
+  </a>
+  <button class="btn btn-secondary btn-sm ">Toplam Oy
+    <span class="badge badge-default badge-pill">
+    {{question?.votesCount?.total}}
+    </span>
+  </button>
+
+
+  <button type="button" class="btn btn-secondary btn-sm ">Gosterim
+
+    <span class="badge badge-default badge-pill">  {{question?.showCount}}</span>
+  </button>
+
+
+  <button type="button" class="btn btn-secondary btn-sm ">Cevap
+    <span class="badge badge-default badge-pill">  {{question?.answers.length}}</span>
+  </button>
+  <alert *ngIf="loginErrMsg" [type]="'warning'" class="small" >
+   <i class="fa fa-warning"></i> {{loginErrMsg}}
+    <a href="" routerLink="/auth">Giris / Kayit</a>
+  </alert>
+</div>

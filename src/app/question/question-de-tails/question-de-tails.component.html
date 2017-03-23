@@ -1,0 +1,33 @@
+<div class="col-md-12">
+
+  <app-layout-box>
+    <app-question-header [question]="question" (openModal)="lgModal.show()"></app-question-header>
+    <app-question-block  [question]="question"></app-question-block>
+    <app-question-footer [question]="question" ></app-question-footer>
+  </app-layout-box>
+
+</div>
+
+<div class="col-md-12">
+
+  <br>
+  <h2 class="offset-3 display-3">Cevaplar </h2>
+  <hr>
+  <app-answers *ngIf="question?.answers.length > 0" [answers]="question?.answers"></app-answers>
+  <div *ngIf="question?.answers.length == 0">
+    <h3>Henuz hic cevap yok!</h3>
+    <button class="btn btn-primary" (click)="lgModal.show()">
+      <i class="fa fa-commenting"></i>
+      Ilk cevabi siz verin.
+    </button>
+  </div>
+
+</div>
+
+
+<app-big-modal bsModal #lgModal="bs-modal" (hideModal)="hide($event)" [title]="'Cevap Veriliyor : '+question?.title">
+  <app-answer-form class="inlineAnswer" [question]="question?._id" (messageAdded)="hide($event)"></app-answer-form>
+</app-big-modal>
+
+
+

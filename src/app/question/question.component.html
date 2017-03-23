@@ -1,0 +1,69 @@
+<div class="row"  >
+  <div class="col-md-12" *ngIf="(isLoggedIn | async) && (user | async)">
+
+    <div  class="card">
+      <div class="card-header">
+        Yeni Soru
+      </div>
+      <div class="card-block">
+        <form role="form" (ngSubmit)="addQuestion()" [formGroup]="questionForm" novalidate>
+
+          <div class="form-group">
+            <div class="alert alert-warning small" *ngIf="questionForm.get('title').dirty && questionForm.get('title').hasError('minlength')">
+              Soru basligi cok kisa!
+            </div>
+            <label >
+              Soru Baslik
+            </label>
+            <input type="email" class="form-control" formControlName="title"/>
+          </div>
+
+          <div class="form-group">
+            <label *ngFor="let cat of selectCatList" class="btn btn-sm btn-outline-success"
+            (click)="removeCatgeory(cat)"
+            >
+              {{cat.name}}
+              <i class="fa fa-close"></i>
+            </label>
+            <label>Kategori</label>
+
+            <input  formControlName="categoriesHidden" hidden >
+            <input class="form-control" formControlName="categories"   placeholder="Kategori ara">
+            <label *ngFor="let cat of catList" class="btn btn-sm btn-outline-primary"
+            (click)="addCatgeory(cat)"
+            >
+              {{cat.name}}
+              <i class="fa fa-plus-circle"></i>
+            </label>
+          </div>
+
+          <div class="form-group">
+
+
+            <label>
+              Soru Metni
+            </label>
+
+            <app-text-editor
+              [elementId]="'questionTextEditor'"
+              (onEditorContentChange)="handleQuestionText($event)"
+            >
+            </app-text-editor>
+          </div>
+
+          <button type="submit" class="btn btn-success" [disabled]="!questionForm.valid">
+           Sor
+          </button>
+
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-md-12" *ngIf="!(isLoggedIn | async)">
+    <app-need-login></app-need-login>
+  </div>
+</div>
+
+

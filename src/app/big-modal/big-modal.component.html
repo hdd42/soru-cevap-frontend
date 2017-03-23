@@ -1,0 +1,18 @@
+
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">{{title}}</h4>
+        <button type="button" class="close pull-right" (click)="hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <ng-content *ngIf="(isLoggedIn | async)"></ng-content>
+        <div class="col-md-12" *ngIf="!(isLoggedIn | async)">
+          <app-need-login></app-need-login>
+        </div>
+      </div>
+    </div>
+  </div>
+

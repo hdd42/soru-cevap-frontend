@@ -1,0 +1,30 @@
+<div class="col-md-12 justify-content-center offset-2">
+  <h1 class="display-4">{{category?.name}} Kategorisindeki Sorular.</h1>
+
+</div>
+
+<app-search-global [leftName]="category?.name"></app-search-global>
+
+<tabset #homeTab>
+  <tab heading="En Yeni Sorular" style="margin-top: 5px ;">
+
+    <app-question-list [questions]="newQuestions"></app-question-list>
+
+  </tab>
+  <tab heading="En Populer">
+
+    <app-question-list [questions]="popularQuestions"></app-question-list>
+
+  </tab>
+  <tab heading="Hic Cevap Alamayanlar">
+    <app-question-list [questions]="noAnswerQuestions"></app-question-list>
+
+
+  </tab>
+
+  <tab heading="+ Soru Sor">
+
+    <app-question></app-question>
+
+  </tab>
+</tabset>

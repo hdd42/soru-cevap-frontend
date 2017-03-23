@@ -1,0 +1,29 @@
+<div class="col-md-12">
+  <h2>Kategoriler</h2>
+
+  <a href="" class="btn btn-sm btn-outline-success" routerLink="/categories/add">
+  <i class="fa fa-plus-circle"></i>  Yeni Kategori Ekle
+  </a>
+  <hr>
+</div>
+
+<div class="row">
+  <div class="col-md-3" *ngFor="let cat of categories">
+    <div class="card" style="min-height: 200px">
+      <img class="card-img-top" width="80px" [src]="cat.imgUrl" alt="Card image cap">
+      <div class="card-block">
+        <p class="card-text">{{cat.description}}</p>
+      </div>
+    </div>
+    <div class="card-footer text-muted">
+      <a type="button" class="btn btn-secondary btn-sm" [routerLink]="['/categories/'+cat.slug+'/questions']">Toplam Soru
+        <span class="badge badge-success badge-pill"> {{cat.questionCount}}</span>
+        <i class="fa fa-arrow-circle-o-right"></i>
+      </a>
+
+    </div>
+  </div>
+
+
+</div>
+
