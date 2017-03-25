@@ -1,12 +1,7 @@
 <div class="col-md-12 pull-right">
   <hr>
-  <pagination [totalItems]="50"
-              [(ngModel)]="bigCurrentPage"
-              [maxSize]="maxSize" class="pagination-md"
-
-              [boundaryLinks]="true" [rotate]="false"
-              (numPages)="numPages = $event">
-
-  </pagination>
+  <pagination [directionLinks]="true" [boundaryLinks]="true"  [totalItems]="meta.count"
+              (pageChanged)="pageChanged($event)"
+              [(ngModel)]="currentPage"></pagination>
   <hr>
 </div>

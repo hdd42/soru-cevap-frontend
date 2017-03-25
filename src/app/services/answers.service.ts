@@ -1,11 +1,12 @@
 import {Inject, Injectable} from '@angular/core';
 import {Http} from "@angular/http";
 import {Observable} from "rxjs";
+import {NeedToLoginService} from "./need-to-login.service";
 
 @Injectable()
 export class AnswerService {
 
-  constructor(private http:Http,@Inject('Api') private api) {
+  constructor(private http:Http,@Inject('Api') private api , private esL:NeedToLoginService) {
 
   }
 
@@ -34,4 +35,11 @@ export class AnswerService {
       .map(_res => _res.json())
   }
 
+  errorHandler(err) :Observable<any>{
+    if(err.status == 401){
+      this.esL.showLogin()
+    }else{
+      return err.json()
+    }
+  }
 }

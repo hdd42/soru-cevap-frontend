@@ -45,11 +45,11 @@
 </div>
 
 
-<template #customItemTemplate let-model="item" let-index="index" class="btn-outline-secondary" >
+<ng-template #customItemTemplate let-model="item" let-index="index" class="btn-outline-secondary" >
   <strong>
     <a href="" routerLink="/questions/{{model.slug}}" class="btn-outline-secondary" >
     {{model.title}}
   </a> <i class="fa fa-arrow-right"></i>
   </strong>
 
-</template>
+</ng-template>

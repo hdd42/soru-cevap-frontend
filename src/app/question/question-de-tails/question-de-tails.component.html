@@ -27,7 +27,7 @@
 </div>
 
 
-<app-big-modal bsModal #lgModal="bs-modal" (hideModal)="hide($event)" [title]="'Cevap Veriliyor : '+question?.title">
+<app-big-modal bsModal #lgModal="bs-modal" (hideModal)="hide()" [title]="'Cevap Veriliyor : '+question?.title">
   <app-answer-form class="inlineAnswer" [question]="question?._id" (messageAdded)="newAnswer($event)"></app-answer-form>
 </app-big-modal>
 

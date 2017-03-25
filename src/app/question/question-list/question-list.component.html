@@ -1,3 +1,4 @@
 <app-question-item *ngFor="let q of questions" [question]="q"></app-question-item>
 
-<app-pagination></app-pagination>
+<app-pagination *ngIf="meta" [meta]="meta" (paginate)="paginate($event)" ></app-pagination>
+{{meta | json}}

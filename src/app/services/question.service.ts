@@ -9,9 +9,10 @@ export class QuestionService {
 
   }
 
-  getQuestions({orderBy='createdAt', filter=''}):Observable<any>{
+  getQuestions({orderBy='createdAt', filter='', skip=0}):Observable<any>{
     const filterParams = new URLSearchParams();
     filterParams.set('orderBy', orderBy);
+    filterParams.set('skip', skip.toString());
     if(filter){
       //add filters
     }

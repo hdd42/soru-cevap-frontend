@@ -47,6 +47,7 @@ import { QuestionBlockComponent } from './question/question-block/question-block
 import { QuestionFooterComponent } from './question/question-footer/question-footer.component';
 import {requestOptionsProvider} from "./services/requestDefaultOptions";
 import { PaginationComponent } from './pagination/pagination.component';
+import {NeedToLoginService} from "./services/need-to-login.service";
 
 @NgModule({
   declarations: [
@@ -92,6 +93,7 @@ import { PaginationComponent } from './pagination/pagination.component';
   providers: [
     requestOptionsProvider,
     QuestionService, CategoryService ,AuthService,AnswerService,
+    NeedToLoginService,
     {provide:'Api', useValue:environment.api},
     {provide:'Auth', useValue:environment.auth}
   ],

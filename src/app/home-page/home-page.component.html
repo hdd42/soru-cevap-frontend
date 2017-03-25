@@ -7,16 +7,16 @@
     <tabset #homeTab>
       <tab heading="En Yeni Sorular" style="margin-top: 5px ;">
 
-        <app-question-list [questions]="newQuestions"></app-question-list>
+        <app-question-list [questions]="newQuestions" [meta]="newQuestionsMeta" [collection]="'newQuestions'" (paginateEmitter)="paginate($event)"></app-question-list>
 
       </tab>
       <tab heading="En Populer">
 
-        <app-question-list [questions]="popularQuestions"></app-question-list>
+        <app-question-list [questions]="popularQuestions" [meta]="popularQuestionsMeta" [collection]="'popularQuestions'" (paginateEmitter)="paginate($event)"  ></app-question-list>
 
       </tab>
       <tab heading="Hic Cevap Alamayanlar">
-        <app-question-list [questions]="noAnswerQuestions"></app-question-list>
+        <app-question-list [questions]="noAnswerQuestions" [meta]="noAnswerQuestionsMeta" [collection]="'noAnswerQuestions'" (paginateEmitter)="paginate($event)" ></app-question-list>
 
 
       </tab>
@@ -33,5 +33,6 @@
     <app-category-menu></app-category-menu>
   </div>
 </div>
+
 
 
