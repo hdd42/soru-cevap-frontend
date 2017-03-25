@@ -1,24 +1,51 @@
-<div style="margin-top: 5px" class="card card-outline-success">
-  <div class="card-header btn-outline-success">
-    <strong>Ahmet Korkmaz </strong>
+<div style="margin-top: 10px ; margin-bottom: 20px" class="card card-outline-secondary"
+     [class.card-outline-success]="answer?.solverMark"
+>
+
+  <div class="card-header " [class.card-outline-success]="answer?.solverMark">
+    <a href="" routerLink="/users/{{answer?.user.name}}">
+      <i class="fa fa-user-circle-o"></i>
+      <strong>{{answer?.user.name}} </strong></a>
 
     <div class="float-md-right justify-content-around">
 
+      <a (click)="solver($event)"
+         *ngIf="!solved?.status && ( (isLoggedIn | async) && (user |async)._id==questionUserId)" href=""
+         class="btn btn-sm btn-primary"
+         popover=" Bu cevabi cozum olarak isaretle, cevap veren : {{answer?.user.name}}!"
+         triggers="mouseenter:mouseleave"
+      >
+        <i class="fa fa-check-circle-o"></i>
+        Bu cevap sorunumu cozuyor!
+      </a>
+
+      <button *ngIf="answer?.solverMark"
+              class="btn btn-sm btn-outline-success">
+        <i class="fa fa-check-circle-o"></i>
+        <strong>
+          Sorunu Cozdu!
+        </strong></button>
+
       <a href="" class="btn btn-sm">
-       <i class="fa fa-facebook-f"></i> Face</a>
-      <a  href="" class="btn btn-sm">
+        <i class="fa fa-facebook-f"></i> Face</a>
+      <a href="" class="btn btn-sm">
         <i class="fa fa-twitter"></i>
+
         Twitter</a>
     </div>
 
   </div>
   <div class="card-block ">
-    <h4 class="card-title btn-outline-success"
-        popover="Soruyu Soran kisi bu cevabi yeterli buldu. Tesekkurler Ahmet!"
+    <h4 *ngIf="answer?.solverMark"  class="card-title btn-outline-success"
+        [class.card-outline-success]="answer?.solverMark"
+        popover=" Soruyu Soran kisi bu cevabi yeterli buldu. Tesekkurler {{answer?.user.name}}!"
         triggers="mouseenter:mouseleave"
     >{{answer?.title}}
       <i class="fa fa-check-circle-o fa-2x"></i>
     </h4>
+
+    <h4 *ngIf="!answer?.solverMark" class="card-title">{{answer?.title}}</h4>
+
     <hr>
     <p [innerHtml]="(sanitize(answer?.answer))">
     </p>
@@ -29,9 +56,42 @@
     {{answer?.createdAt|date:'medium'}}
     <div class="float-md-right">
 
+      <button (click)="upVote()" href="" class="btn btn-secondary btn-sm "
+              popover="Helal bencede guzel cevap!"
+              triggers="mouseenter:mouseleave"
+      >
+        <span class="badge badge-success badge-pill">
+          {{answer?.positiveCount}}
+        </span>
+
+        <i class="fa fa-arrow-circle-up"></i>
+      </button>
+
+      <button (click)="downVote()"
+              class="btn btn-secondary btn-sm "
+              popover="Ya bi yuru git. Boyle cevap mi olur!"
+              triggers="mouseenter:mouseleave"
+      >
+
+         <span class="badge badge-warning badge-pill">
+         {{answer?.negativeCount}}
+         </span>
+
+        <i class="fa fa-arrow-circle-down"></i>
+      </button>
+
       <button type="button" class="btn btn-secondary btn-sm ">Oy
         <span class="badge badge-default badge-pill"> {{answer?.negativeCount+answer.positiveCount}}</span>
       </button>
+
+      <alert *ngIf="loginErrMsg" [type]="'warning'" class="small">
+        <i class="fa fa-warning"></i> {{loginErrMsg}}
+        <a href="" routerLink="/auth">Giris / Kayit</a>
+      </alert>
+
+      <alert *ngIf="voteErrorMsg" [type]="'warning'" class="small">
+        <i class="fa fa-warning"></i> {{voteErrorMsg}}
+      </alert>
 
     </div>
 

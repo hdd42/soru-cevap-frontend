@@ -26,11 +26,16 @@ export class QuestionDetailsComponent implements OnInit {
 
 
 
-  hide(answers){
-    if(answers){
-      this.question.answers = answers
-    }
+  hide(){
+
     this.childModal.hide()
+  }
+
+  newAnswer(answer){
+  console.log("ss : ",answer)
+    //answer.user = localStorage.getItem('user')
+    this.question.answers = answer.message
+    this.hide()
   }
 
 }

@@ -8,8 +8,8 @@ import {AuthService} from "../../services/auth.service";
   selector: 'app-question-footer',
   templateUrl: './question-footer.component.html',
   styleUrls: ['./question-footer.component.css'],
-  host:{
-    "class":'x_boxFooter'
+  host: {
+    "class": 'x_boxFooter'
   }
 })
 export class QuestionFooterComponent implements OnInit {
@@ -17,10 +17,11 @@ export class QuestionFooterComponent implements OnInit {
   @Input('question') question
   @Input('short') short
 
-  loginErrMsg=""
+  loginErrMsg = ""
+  voterErrMsg = ""
 
 
-  constructor(private qs:QuestionService, private auth:AuthService) {
+  constructor(private qs: QuestionService, private auth: AuthService) {
 
   }
 
@@ -29,30 +30,61 @@ export class QuestionFooterComponent implements OnInit {
   }
 
 
-  upVote($event){
+  upVote($event) {
     $event.preventDefault()
-    if(!this.auth.isLoggedInCurrent()){
-      this.loginErrMsg ="Oyvermek icin lutfen once giris yapin!"
-      return
+    if (!this.auth.isLoggedInCurrent()) {
+      this.showError("Oyvermek icin lutfen once giris yapin!")
     }
-    this.qs.upVote(this.question._id)
-      .subscribe(_res => {
-        this.question.votesCount.total += 1
-        this.question.votesCount.upVote += 1
-      })
+    else {
+      this.qs.upVote(this.question._id)
+        .subscribe(_res => {
+          console.log(_res)
+          let message = _res.message;
+          if (message) {
+            this.showError(message, 'vote')
+          } else {
+            this.question.votesCount.total += 1
+            this.question.votesCount.upVote += 1
+          }
+        })
+    }
   }
 
-  downVote($event){
+  downVote($event) {
     $event.preventDefault()
-    if(!this.auth.isLoggedInCurrent()){
-      this.loginErrMsg ="Oyvermek icin lutfen once giris yapin!"
-      return
+    if (!this.auth.isLoggedInCurrent()) {
+      this.showError("Oyvermek icin lutfen once giris yapin!")
+
     }
-    this.qs.downVote(this.question._id)
-      .subscribe(_res =>{
-        this.question.votesCount.total += 1
-        this.question.votesCount.downVote += 1
-      } )
+    else {
+      this.qs.downVote(this.question._id)
+        .subscribe(_res => {
+          let message = _res.message;
+          if (message) {
+            this.showError(message, 'vote')
+          }
+          else {
+            this.question.votesCount.total += 1
+            this.question.votesCount.downVote += 1
+          }
+
+        })
+    }
+
+  }
+
+  showError(message, type = 'login') {
+    if (type != 'login') {
+      this.voterErrMsg = message
+      setTimeout(() => {
+        this.voterErrMsg = null
+      }, 2000)
+    } else {
+      this.loginErrMsg = message
+      setTimeout(() => {
+        this.loginErrMsg = null
+      }, 3000)
+    }
   }
 
 }

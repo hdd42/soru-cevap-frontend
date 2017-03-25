@@ -17,11 +17,12 @@ export class QuestionHeaderComponent implements OnInit {
 
   @Output() openModal = new EventEmitter()
 
+  isLoggedIn:Observable<any>
 
   constructor(private auth:AuthService) { }
 
   ngOnInit() {
-
+   this.isLoggedIn = this.auth.isLoggedIn()
   }
 
   openAnswerModal($event){

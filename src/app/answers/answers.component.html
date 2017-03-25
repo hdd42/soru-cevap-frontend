@@ -1,2 +1,5 @@
 
-<app-answer-item *ngFor="let a of answers" [answer]="a"></app-answer-item>
+<app-answer-item *ngFor="let a of answers" [answer]="a"
+                 [questionUserId]="questionUserId"
+                 [solved]="solved"
+                 (solverEmitter)="questionSolved($event)"></app-answer-item>

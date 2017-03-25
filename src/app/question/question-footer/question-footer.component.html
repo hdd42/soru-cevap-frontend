@@ -43,4 +43,8 @@
    <i class="fa fa-warning"></i> {{loginErrMsg}}
     <a href="" routerLink="/auth">Giris / Kayit</a>
   </alert>
+
+  <alert *ngIf="voterErrMsg" [type]="'warning'" class="small" >
+    <i class="fa fa-warning"></i> {{voterErrMsg}}
+  </alert>
 </div>

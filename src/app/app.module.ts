@@ -46,6 +46,7 @@ import { QuestionHeaderComponent } from './question/question-header/question-hea
 import { QuestionBlockComponent } from './question/question-block/question-block.component';
 import { QuestionFooterComponent } from './question/question-footer/question-footer.component';
 import {requestOptionsProvider} from "./services/requestDefaultOptions";
+import { PaginationComponent } from './pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import {requestOptionsProvider} from "./services/requestDefaultOptions";
     LayoutBoxComponent,
     QuestionHeaderComponent,
     QuestionBlockComponent,
-    QuestionFooterComponent
+    QuestionFooterComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,

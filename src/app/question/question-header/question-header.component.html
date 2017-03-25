@@ -1,21 +1,35 @@
-<strong>Ahmet Korkmaz </strong>
 
+<strong>
+  Soran :
+<i class="fa fa-user-secret"></i>
+</strong>
+<a href="" routerLink="/users/{{questions?.user?.name}}"
+   popover="Kullanici Profilini Gor!"
+   triggers="mouseenter:mouseleave"
+>
+
+  <strong> {{question?.user?.name}}</strong>
+</a>
 
 <div class="float-md-right">
 
-      <span *ngIf="question?.solved.status" class="btn btn-outline-success btn-sm">
+      <span *ngIf="question?.solved.status" class="btn btn-sm">
         <span class="badge badge-pill badge-success">
          <i class="fa fa-check-circle-o fa-2x"></i>
         </span>
 
-        <strong> Ahmet Korkmaz tarafindan Cozuldu! </strong>
+        <strong *ngIf="short"
+                popover="{{question?.solved?.user.name}} tarafindan cozuldu :)"
+                triggers="mouseenter:mouseleave">
+         Cozuldu! </strong>
+        <strong  *ngIf="!short"> {{question?.solved?.user.name}} tarafindan Cozuldu! </strong>
       </span>
-  <a href="" class="btn btn-sm"
+  <a href="" *ngIf="!short" class="btn btn-sm"
      popover="Facebook da paylas!"
      triggers="mouseenter:mouseleave">
     <i class="fa fa-facebook-f"></i> Face
   </a>
-  <a href="" class="btn btn-sm"
+  <a href="" *ngIf="!short" class="btn btn-sm"
      popover="Twitter de paylas!"
      triggers="mouseenter:mouseleave">
     <i class="fa fa-twitter"></i>

@@ -6,13 +6,13 @@
         Yeni Ketagori
       </div>
       <div class="card-block">
-        <form role="form">
+        <form role="form" novalidate [formGroup]="categoryForm" (ngSubmit)="addCategory()">
           <div class="form-group">
 
             <label for="exampleInputEmail1">
               Kategori Baslik
             </label>
-            <input type="email" class="form-control" id="exampleInputEmail1"/>
+            <input type="text" formControlName="name" class="form-control" id="exampleInputEmail1"/>
           </div>
 
 
@@ -21,11 +21,7 @@
             <label>
              Aciklama
             </label>
-            <app-text-editor
-              [elementId]="'my-editor-id'"
-              (onEditorKeyup)="keyupHandlerFunction($event)"
-            >
-            </app-text-editor>
+            <input type="text" class="form-control" formControlName="description">
           </div>
 
           <div class="form-group">
@@ -33,7 +29,7 @@
             <input type="file" class="form-control">
           </div>
 
-          <button type="submit" class="btn btn-default">
+          <button [disabled]="!categoryForm.valid" type="submit" class="btn btn-default">
             Kaydet
           </button>
         </form>

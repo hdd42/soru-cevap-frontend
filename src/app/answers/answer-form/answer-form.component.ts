@@ -48,7 +48,7 @@ export class AnswerFormComponent implements OnInit {
     this.as.addAnswer(this._id , {answer , answerRaw , title})
       .subscribe(_res => {
         console.log(_res)
-        this.messageAdded.emit(_res.answers);
+        this.messageAdded.emit(_res);
       })
   }
 }

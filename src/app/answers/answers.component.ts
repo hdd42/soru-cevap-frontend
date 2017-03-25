@@ -8,11 +8,17 @@ import {AnswerService} from "../services/answers.service";
 })
 export class AnswersComponent implements OnInit {
   @Input('answers') answers
+  @Input('solved') solved
+  @Input('questionUserId') questionUserId
 
   constructor(private as : AnswerService) { }
 
   ngOnInit() {
 
   }
-
+  questionSolved($event){
+   this.answers.unshift($event)
+    this.solved.status=true;
+    this.solved.user =$event.user
+  }
 }

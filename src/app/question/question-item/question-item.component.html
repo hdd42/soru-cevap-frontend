@@ -1,4 +1,4 @@
-<div style="margin-top: 5px" class="card">
+<div style="margin-top: 5px" class="card " [class.card-outline-success]="question?.solved?.status">
   <div class="card-header">
   <app-question-header [question]="question" [short]="'true'"></app-question-header>
 

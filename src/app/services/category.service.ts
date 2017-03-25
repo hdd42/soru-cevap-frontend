@@ -27,9 +27,15 @@ export class CategoryService {
 
   getCategoryBySlug(slug,orderBy='createdAt', filter="") : Observable<any>{
 
-
     let url = `${this.api}/categories/slug/${slug}`
     return this.http.get(url)
+      .map(_res => _res.json())
+  }
+
+  addCategory(cat) : Observable<any>{
+
+    let url = `${this.api}/categories/`
+    return this.http.post(url,cat)
       .map(_res => _res.json())
   }
 }

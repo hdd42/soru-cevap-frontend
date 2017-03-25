@@ -10,10 +10,12 @@
 
 <div class="col-md-12">
 
-  <br>
-  <h2 class="offset-3 display-3">Cevaplar </h2>
   <hr>
-  <app-answers *ngIf="question?.answers.length > 0" [answers]="question?.answers"></app-answers>
+  <h2 class="display-3">Cevaplar </h2>
+  <hr>
+  <app-answers *ngIf="question?.answers.length > 0" [answers]="question?.answers"
+               [questionUserId]="question?.user?._id"
+               [solved]="question?.solved"></app-answers>
   <div *ngIf="question?.answers.length == 0">
     <h3>Henuz hic cevap yok!</h3>
     <button class="btn btn-primary" (click)="lgModal.show()">
@@ -26,7 +28,7 @@
 
 
 <app-big-modal bsModal #lgModal="bs-modal" (hideModal)="hide($event)" [title]="'Cevap Veriliyor : '+question?.title">
-  <app-answer-form class="inlineAnswer" [question]="question?._id" (messageAdded)="hide($event)"></app-answer-form>
+  <app-answer-form class="inlineAnswer" [question]="question?._id" (messageAdded)="newAnswer($event)"></app-answer-form>
 </app-big-modal>
 
 
