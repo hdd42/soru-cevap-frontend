@@ -30,4 +30,10 @@ export class QuestionHeaderComponent implements OnInit {
     this.openModal.emit(true)
 
   }
+
+  getShareUrl(slug){
+    return `http://46.101.221.75/questions/${slug}`
+  }
+
+
 }

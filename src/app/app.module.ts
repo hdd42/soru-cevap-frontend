@@ -8,7 +8,7 @@ import './RxJSimports'
 
 /** Third Parties*/
 import  {Ng2BootstrapModule} from 'ng2-bootstrap'
-
+import {ShareButtonsModule} from 'ng2-sharebuttons';
 
 /** Internal */
 import { AppComponent } from './app.component';
@@ -48,6 +48,7 @@ import { QuestionFooterComponent } from './question/question-footer/question-foo
 import {requestOptionsProvider} from "./services/requestDefaultOptions";
 import { PaginationComponent } from './pagination/pagination.component';
 import {NeedToLoginService} from "./services/need-to-login.service";
+import { ShareComponent } from './share/share.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import {NeedToLoginService} from "./services/need-to-login.service";
     QuestionHeaderComponent,
     QuestionBlockComponent,
     QuestionFooterComponent,
-    PaginationComponent
+    PaginationComponent,
+    ShareComponent
   ],
   imports: [
     BrowserModule,
@@ -87,6 +89,7 @@ import {NeedToLoginService} from "./services/need-to-login.service";
     ReactiveFormsModule,
     HttpModule,
     RouterModule.forRoot(appRoutes),
+    ShareButtonsModule.forRoot(),
     Ng2BootstrapModule.forRoot()
 
   ],
