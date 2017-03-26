@@ -4,7 +4,9 @@
     <div class="card-block">
       <ul class="nav flex-column">
         <li class="nav-item" *ngFor="let cat of categories">
-          <a class="nav-link active" href="" routerLink="/categories/{{cat.slug}}/questions">{{cat.name}}</a>
+          <a class="nav-link active" href="" routerLink="/categories/{{cat.slug}}/questions">{{cat.name}}
+          <span class="badge badge-success">{{cat.questionCount}}</span>
+          </a>
         </li>
       </ul>
     </div>

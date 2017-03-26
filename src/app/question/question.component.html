@@ -25,10 +25,10 @@
               {{cat.name}}
               <i class="fa fa-close"></i>
             </label>
-            <label>Kategori</label>
+            <label>Kategori Ara</label>
 
             <input  formControlName="categoriesHidden" hidden >
-            <input class="form-control" formControlName="categories"   placeholder="Kategori ara">
+            <input class="form-control" formControlName="categories"   placeholder="Aramak istediginiz kategoriyi yazmaya baslayin">
             <label *ngFor="let cat of catList" class="btn btn-sm btn-outline-primary"
             (click)="addCatgeory(cat)"
             >

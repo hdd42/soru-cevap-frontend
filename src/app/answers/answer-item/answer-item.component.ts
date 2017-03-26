@@ -42,6 +42,7 @@ export class AnswerItemComponent implements OnInit {
     this.as.questionSolved(this.answer._id)
       .subscribe((_res) => {
       console.log(this.answer)
+        this.answer.solverMark=true;
         this.solverEmitter.emit(this.answer)
       })
   }

@@ -22,12 +22,11 @@ export class QuestionService {
     return this.http.get(url,options).map(_res => _res.json())
   }
 
-  getQuestionsByCategory(slug,orderBy='createdAt',filter=''):Observable<any>{
+  getQuestionsByCategory({orderBy='createdAt', slug, skip=0}):Observable<any>{
     const filterParams = new URLSearchParams();
     filterParams.set('orderBy', orderBy);
-    if(filter){
-      //add filters
-    }
+    filterParams.set('skip',skip.toString());
+
     const options = new RequestOptions({ search: filterParams });
     let url = `${this.api}/categories/${slug}/questions`
     return this.http.get(url,options).map(_res => _res.json())

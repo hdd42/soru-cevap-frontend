@@ -24,8 +24,6 @@ export class HomePageComponent implements OnInit {
     this.getQuestions();
     this.getQuestions('popularQuestions');
     this.getQuestions('noAnswerQuestions');
-
-
   }
 
   private getQuestions(collection = 'newQuestions', skip = 0) {

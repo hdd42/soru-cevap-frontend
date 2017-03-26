@@ -17,7 +17,6 @@ export class AnswersComponent implements OnInit {
 
   }
   questionSolved($event){
-   this.answers.unshift($event)
     this.solved.status=true;
     this.solved.user =$event.user
   }
