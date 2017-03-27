@@ -37,10 +37,19 @@ export class QuestionService {
     return this.http.get(url).map(_res => _res.json())
   }
 
+  deleteQuestion(id):Observable<any>{
+    let url = `${this.api}/questions/${id}`
+    return this.http.delete(url).map(_res => _res.json())
+  }
 
   addQuestions(question):Observable<any>{
     let url = `${this.api}/questions`
     return this.http.post(url,question).map(_res=>_res.json())
+  }
+
+  updateQuestions(question, id):Observable<any>{
+    let url = `${this.api}/questions/${id}`
+    return this.http.put(url,question).map(_res=>_res.json())
   }
 
   upVote(_id) : Observable<any>{

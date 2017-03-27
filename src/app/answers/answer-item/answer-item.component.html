@@ -9,6 +9,8 @@
 
     <div class="float-md-right justify-content-around">
 
+
+
       <a (click)="solver($event)"
          *ngIf="!solved?.status && ( (isLoggedIn | async) && (user |async)._id==questionUserId)" href=""
          class="btn btn-sm btn-primary"
@@ -26,10 +28,41 @@
           Sorunu Cozdu!
         </strong></button>
 
-  <app-share
-    popover="Paylas!"
-    triggers="mouseenter:mouseleave"
-  ></app-share>
+      <button *ngIf="(isLoggedIn | async) && ((user |async)._id == answer?.user?._id)"
+       class="btn btn-sm btn-secondary"
+      (click)="updateAnswer()"
+      >
+        <i class="fa fa-edit"></i>
+        Duzenle
+      </button>
+      <button *ngIf="(isLoggedIn | async) && ((user |async)._id == answer?.user?._id) " (click)="deleting=!deleting" class="btn btn-sm btn-secondary">
+        <i class="fa fa-trash"></i>
+        Sil
+      </button>
+      <alert *ngIf="deleting" [type]="'danger'" dismissible="true">
+        Bu cevabi silmek istediginizden eminmisiniz?
+        <hr>
+        <button (click)="delete()" class="btn btn-sm btn-success" style="margin-right: 5px"
+                popover="Sil"
+                triggers="mouseenter:mouseleave">
+          Evet Sil
+          <i class="fa fa-check-circle-o"></i>
+        </button>
+
+        <button class="btn btn-sm btn-warning" (click)="deleting=!deleting"
+                popover="vazgec"
+                triggers="mouseenter:mouseleave">
+          Iptal
+          <i class="fa fa-window-close-o"></i>
+        </button>
+      </alert>
+
+      <a href="" class="btn btn-sm">
+        <i class="fa fa-facebook-f"></i> Face</a>
+      <a href="" class="btn btn-sm">
+        <i class="fa fa-twitter"></i>
+
+        Twitter</a>
     </div>
 
   </div>

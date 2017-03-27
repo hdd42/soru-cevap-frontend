@@ -3,7 +3,7 @@
 
     <div  class="card">
       <div class="card-header">
-        Yeni Soru
+       {{title}}
       </div>
       <div class="card-block">
         <form role="form" (ngSubmit)="addQuestion()" [formGroup]="questionForm" novalidate>
@@ -43,16 +43,20 @@
             <label>
               Soru Metni
             </label>
-
-            <app-text-editor
-              [elementId]="'questionTextEditor'"
-              (onEditorContentChange)="handleQuestionText($event)"
+            <app-text-editor [preValue]="editQuestionText"
+                             [elementId]="'questionTextEditor'"
+                             (onEditorContentChange)="handleQuestionText($event)"
             >
             </app-text-editor>
+
           </div>
 
-          <button type="submit" class="btn btn-success" [disabled]="!questionForm.valid">
+          <button *ngIf="!isEdit" type="submit" class="btn btn-success" [disabled]="!questionForm.valid">
            Sor
+          </button>
+
+          <button type="submit" *ngIf="isEdit" class="btn btn-success" [disabled]="!questionForm.valid">
+            Degisikligi Kaydet
           </button>
 
         </form>

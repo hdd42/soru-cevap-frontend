@@ -6,6 +6,9 @@ import {CategoriesComponent} from "./categories/categories.component";
 import {AddCategoryComponent} from "./categories/add-category/add-category.component";
 import {AuthComponent} from "./auth/auth/auth.component";
 import {ListCategoryQuestions} from "./categories/list-category/list-category.component";
+import {EditQuestionsComponent} from "./question/edit-questions/edit-questions.component";
+import {QuestionComponent} from "./question/question.component";
+import {QuestionResolver} from "./services/resolvers/route-question.resolver.service";
 
 
 export const appRoutes: Routes = [
@@ -15,6 +18,12 @@ export const appRoutes: Routes = [
   {path: 'categories/add', component: AddCategoryComponent},
   {path: 'categories/:slug/questions', component: ListCategoryQuestions},
   {path: 'questions/:slug', component: QuestionDetailsComponent},
+  {
+    path: 'questions/:slug/edit', component: QuestionComponent,
+    resolve: {
+      question: QuestionResolver
+    }
+  },
   {path: 'auth', component: AuthComponent},
   {path: '**', component: PageNotFoundComponent}
 ];

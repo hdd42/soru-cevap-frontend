@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AnswerService} from "../services/answers.service";
 
 @Component({
@@ -10,6 +10,8 @@ export class AnswersComponent implements OnInit {
   @Input('answers') answers
   @Input('solved') solved
   @Input('questionUserId') questionUserId
+  @Output() answerDeletedEmitter= new EventEmitter()
+  @Output() answerUpdateEmitter= new EventEmitter()
 
   constructor(private as : AnswerService) { }
 
@@ -19,5 +21,13 @@ export class AnswersComponent implements OnInit {
   questionSolved($event){
     this.solved.status=true;
     this.solved.user =$event.user
+  }
+
+  answerDeleted(id){
+    this.answerDeletedEmitter.emit(id)
+  }
+
+  updateAnswer(id){
+    this.answerUpdateEmitter.emit(id)
   }
 }

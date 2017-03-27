@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AuthService} from "../../services/auth.service";
 import {Observable} from "rxjs";
+import {QuestionService} from "../../services/question.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-question-header',
@@ -16,13 +18,14 @@ export class QuestionHeaderComponent implements OnInit {
   @Input('short') short
 
   @Output() openModal = new EventEmitter()
-
+  deleting=false;
   isLoggedIn:Observable<any>
-
-  constructor(private auth:AuthService) { }
+  user :Observable<any>
+  constructor(private auth:AuthService, private qs:QuestionService , private router:Router) { }
 
   ngOnInit() {
    this.isLoggedIn = this.auth.isLoggedIn()
+    this.user=this.auth.getUser()
   }
 
   openAnswerModal($event){
@@ -34,6 +37,15 @@ export class QuestionHeaderComponent implements OnInit {
   getShareUrl(slug){
     return `http://46.101.221.75/questions/${slug}`
   }
+  shareLater($event){
+    $event.preventDefault()
+  }
 
+  delete(){
+    this.qs.deleteQuestion(this.question._id)
+      .subscribe(_res =>{
+        this.router.navigate(['/'])
+      })
+  }
 
 }

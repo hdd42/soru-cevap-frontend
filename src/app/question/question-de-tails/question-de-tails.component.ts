@@ -13,6 +13,8 @@ export class QuestionDetailsComponent implements OnInit {
   @ViewChild('lgModal') public childModal:ModalDirective;
 
   question
+  modalTitle =''
+  answerToUpdate;
   constructor(private qs:QuestionService, private route:ActivatedRoute) {
 
   }
@@ -20,7 +22,10 @@ export class QuestionDetailsComponent implements OnInit {
   ngOnInit() {
     this.route.params
       .flatMap(_params => this.qs.getQuestionBySlug(_params['slug']))
-      .subscribe(_res => this.question = _res.message)
+      .subscribe(_res =>  {
+        this.question = _res.message
+        this.modalTitle = `Cevap Veriliyor : ${this.question.title}`
+    })
 
   }
 
@@ -38,4 +43,24 @@ export class QuestionDetailsComponent implements OnInit {
     this.hide()
   }
 
+  answerDeleted(id){
+    this.question.answers = this.question.answers.filter(_a => _a._id != id)
+  }
+
+  updateAnswer(id){
+    console.log("answer updating...")
+    let answer = this.question.answers.filter(_a => _a._id == id)[0]
+    this.answerToUpdate = answer
+    console.log(answer)
+    this.modalTitle= `Guncelleniyor : ${this.question.title}`
+    this.childModal.show()
+  }
+
+  answerUpdated(answer){
+    this.question.answers = this.question.answers.map(a => {
+      if(a._id ==answer._id) return answer
+      return a
+    })
+    this.hide()
+  }
 }

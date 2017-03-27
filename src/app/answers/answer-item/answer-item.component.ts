@@ -15,6 +15,10 @@ export class AnswerItemComponent implements OnInit {
   @Input('answer') answer
   @Input('solved') solved
   @Input('questionUserId') questionUserId
+  @Output() answerDeleted = new EventEmitter()
+  @Output() answerUpdate = new EventEmitter()
+
+  deleting=false;
 
   user:Observable<any>
   isLoggedIn:Observable<any>
@@ -91,5 +95,13 @@ export class AnswerItemComponent implements OnInit {
           this.loginErrMsg =''
         },3000)
       }
+  }
+
+  delete(){
+    this.as.delete(this.answer._id)
+      .subscribe(_res => this.answerDeleted.emit(this.answer._id))
+  }
+  updateAnswer(){
+    this.answerUpdate.emit(this.answer._id)
   }
 }

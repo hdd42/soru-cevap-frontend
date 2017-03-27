@@ -15,12 +15,16 @@
     <alert *ngIf="errorMessage" [type]="'danger'" dismissible="true">{{ errorMessage }}</alert>
     <app-text-editor
       [elementId]="'answerTextEditor'"
-      (onEditorContentChange)="handleAnswerText($event)"
+      (onEditorContentChange)="handleAnswerText($event)" [preValue]="preValue"
     >
     </app-text-editor>
   </div>
 
-  <button [disabled]="!answerForm.valid" type="submit" class="btn btn-default">
-    Submit
+  <button *ngIf="!preValue" [disabled]="!answerForm.valid" type="submit" class="btn btn-default">
+    Ekle
+  </button>
+
+  <button *ngIf="preValue" [disabled]="!answerForm.valid" type="submit" class="btn btn-default">
+    Guncelle
   </button>
 </form>

@@ -23,6 +23,15 @@ export class AnswerService {
       .map(_res => _res.json().message)
   }
 
+
+
+  updateAnswer({questionId, answerId, answer, answerRaw, title}):Observable<any>{
+    let url =`${this.api}/answers/${answerId}`
+    return this.http.put(url,{questionId, answerId, answer, answerRaw, title})
+      .map(_res => _res.json())
+  }
+
+
   upVote(id) : Observable<any>{
     let url =`${this.api}/answers/${id}/vote`
     return this.http.put(url,{vote:'up'})
@@ -41,5 +50,11 @@ export class AnswerService {
     }else{
       return err.json()
     }
+  }
+
+  delete(id) : Observable<any>{
+    let url =`${this.api}/answers/${id}/`
+    return this.http.delete(url)
+      .map(_res => _res.json())
   }
 }

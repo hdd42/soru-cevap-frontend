@@ -9,14 +9,39 @@
 >
 
   <strong> {{question?.user?.name}}</strong>
-  <a *ngFor="let cat of question?.categories" routerLink="/categories/{{cat.slug}}/questions"
-     class="badge badge-default badge-pill">{{cat.name}}</a>
-  <a *ngIf="!short" href="" (click)="openAnswerModal($event)" class="btn btn-sm btn-info">
-    <i class="fa fa-commenting-o "></i>
-    Cevap Ver</a>
-</a>
 
+</a>
+, <strong>Etiketler : </strong>
+<a *ngFor="let cat of question?.categories" routerLink="/categories/{{cat.slug}}/questions"
+   class="badge badge-default badge-pill">{{cat.name}}</a>
 <div class="float-md-right">
+
+  <a *ngIf="(isLoggedIn | async) && ((user |async)._id == question?.user?._id) && !short"
+     href="" routerLink="/questions/{{question?.slug}}/edit" class="btn btn-sm btn-secondary">
+    <i class="fa fa-edit"></i>
+    Duzenle
+  </a>
+  <button *ngIf="(isLoggedIn | async) && ((user |async)._id == question?.user?._id) && !short" (click)="deleting=!deleting" class="btn btn-sm btn-secondary">
+    <i class="fa fa-trash"></i>
+    Sil
+  </button>
+  <alert *ngIf="deleting" [type]="'danger'" dismissible="true">
+    Bu soruyu silmek istediginizden eminmisiniz?
+    <hr>
+    <button (click)="delete()" class="btn btn-sm btn-success" style="margin-right: 5px"
+            popover="Sil"
+            triggers="mouseenter:mouseleave">
+      Evet Sil
+      <i class="fa fa-check-circle-o"></i>
+    </button>
+
+    <button class="btn btn-sm btn-warning" (click)="deleting=!deleting"
+            popover="vazgec"
+            triggers="mouseenter:mouseleave">
+      Iptal
+      <i class="fa fa-window-close-o"></i>
+    </button>
+  </alert>
 
       <span *ngIf="question?.solved.status" class="btn btn-sm">
         <span class="badge badge-pill badge-success">
@@ -29,12 +54,23 @@
          Cozuldu! </strong>
         <strong  *ngIf="!short"> {{question?.solved?.user.name}} tarafindan Cozuldu! </strong>
       </span>
+  <a href="" (click)="shareLater($event)" *ngIf="!short" class="btn btn-sm"
+     popover="Facebook da paylas!"
+     triggers="mouseenter:mouseleave">
+    <i class="fa fa-facebook-f"></i> Face
+  </a>
 
-  <app-share *ngIf="!short" [data]="questions?.slug">
 
-  </app-share>
+  <a href="" *ngIf="!short" (click)="shareLater($event)" class="btn btn-sm"
+     popover="Twitter da paylas!"
+     triggers="mouseenter:mouseleave">
+    <i class="fa fa-twitter"></i>
+    Twitter
+  </a>
 
-
+  <a *ngIf="!short" href="" (click)="openAnswerModal($event)" class="btn btn-sm btn-info">
+    <i class="fa fa-commenting-o "></i>
+    Cevap Ver</a>
 
 
 </div>

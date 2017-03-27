@@ -8,7 +8,7 @@ import './RxJSimports'
 
 /** Third Parties*/
 import  {Ng2BootstrapModule} from 'ng2-bootstrap'
-import {ShareButtonsModule} from 'ng2-sharebuttons';
+
 
 /** Internal */
 import { AppComponent } from './app.component';
@@ -48,7 +48,10 @@ import { QuestionFooterComponent } from './question/question-footer/question-foo
 import {requestOptionsProvider} from "./services/requestDefaultOptions";
 import { PaginationComponent } from './pagination/pagination.component';
 import {NeedToLoginService} from "./services/need-to-login.service";
-import { ShareComponent } from './share/share.component';
+import { UsersComponent } from './users/users.component';
+import { EditQuestionsComponent } from './question/edit-questions/edit-questions.component';
+import {QuestionResolver} from "./services/resolvers/route-question.resolver.service";
+
 
 @NgModule({
   declarations: [
@@ -81,7 +84,9 @@ import { ShareComponent } from './share/share.component';
     QuestionBlockComponent,
     QuestionFooterComponent,
     PaginationComponent,
-    ShareComponent
+    UsersComponent,
+    EditQuestionsComponent
+
   ],
   imports: [
     BrowserModule,
@@ -89,14 +94,13 @@ import { ShareComponent } from './share/share.component';
     ReactiveFormsModule,
     HttpModule,
     RouterModule.forRoot(appRoutes),
-    ShareButtonsModule.forRoot(),
     Ng2BootstrapModule.forRoot()
 
   ],
   providers: [
     requestOptionsProvider,
     QuestionService, CategoryService ,AuthService,AnswerService,
-    NeedToLoginService,
+    NeedToLoginService,QuestionResolver,
     {provide:'Api', useValue:environment.api},
     {provide:'Auth', useValue:environment.auth}
   ],

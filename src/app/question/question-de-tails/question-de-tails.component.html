@@ -13,7 +13,8 @@
   <hr>
   <h2 class="display-3">Cevaplar </h2>
   <hr>
-  <app-answers *ngIf="question?.answers.length > 0" [answers]="question?.answers"
+  <app-answers  *ngIf="question?.answers.length > 0" [answers]="question?.answers" (answerDeletedEmitter)="answerDeleted($event)"
+                (answerUpdateEmitter)="updateAnswer($event)"
                [questionUserId]="question?.user?._id"
                [solved]="question?.solved"></app-answers>
   <div *ngIf="question?.answers.length == 0">
@@ -27,8 +28,13 @@
 </div>
 
 
-<app-big-modal bsModal #lgModal="bs-modal" (hideModal)="hide()" [title]="'Cevap Veriliyor : '+question?.title">
-  <app-answer-form class="inlineAnswer" [question]="question?._id" (messageAdded)="newAnswer($event)"></app-answer-form>
+<app-big-modal bsModal #lgModal="bs-modal" (hideModal)="hide()" [title]="modalTitle">
+  <app-answer-form *ngIf="!answerToUpdate" class="inlineAnswer" [question]="question?._id" (messageAdded)="newAnswer($event)"
+                   [answerInput]="2==3"
+                    ></app-answer-form>
+
+  <app-answer-form *ngIf="answerToUpdate" class="inlineAnswer" [question]="question?._id" (messageAdded)="newAnswer($event)" (answerUpdated)="answerUpdated($event)"
+                   [answerInput]="answerToUpdate" ></app-answer-form>
 </app-big-modal>
 
 
