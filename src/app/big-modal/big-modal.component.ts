@@ -29,7 +29,7 @@ export class BigModalComponent implements OnInit {
 }
 
   hide(){
-    this.hideModal.emit(true)
+    this.hideModal.emit()
   }
 
 }

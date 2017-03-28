@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {AnswerService} from "../../services/answers.service";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-answer-form',
@@ -10,9 +11,11 @@ import {AnswerService} from "../../services/answers.service";
 export class AnswerFormComponent implements OnInit, AfterViewInit {
   @Input('question') _id
   @Input('answerInput') answerInput
+  @Input('elementId') elementID
 
   @Output() messageAdded = new EventEmitter()
   @Output() answerUpdated = new EventEmitter()
+  @Output() hideModal = new EventEmitter()
 
   answerRaw = ""
   answerBody = ""
@@ -23,7 +26,7 @@ export class AnswerFormComponent implements OnInit, AfterViewInit {
 
   errorMessage = ""
 
-  constructor(private fb: FormBuilder, private as: AnswerService) {
+  constructor(private fb: FormBuilder, private as: AnswerService, private router:Router, private route:ActivatedRoute) {
 
     this.titleCtrl = new FormControl('', Validators.required)
 
@@ -33,6 +36,7 @@ export class AnswerFormComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    console.log("answerInput :", this.answerInput)
     if (this.answerInput) {
       this.editModeOn()
     }
@@ -53,7 +57,7 @@ export class AnswerFormComponent implements OnInit, AfterViewInit {
       return;
     }
     let {answer = this.answerBody, answerRaw = this.answerRaw, title} = this.answerForm.value
-    console.log("Answer : ", answerRaw)
+
 
     if (!this.preValue) {
       this.as.addAnswer(this._id, {answer, answerRaw, title})
@@ -67,7 +71,8 @@ export class AnswerFormComponent implements OnInit, AfterViewInit {
       this.as.updateAnswer({questionId :this._id, answerId:this.answerInput._id, answer, answerRaw, title})
         .subscribe(_res => {
           this.answerUpdated.emit(_res.answer)
-
+          this.hideModal.emit()
+          return
         })
 
     }

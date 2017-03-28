@@ -14,7 +14,7 @@
     </label>
     <alert *ngIf="errorMessage" [type]="'danger'" dismissible="true">{{ errorMessage }}</alert>
     <app-text-editor
-      [elementId]="'answerTextEditor'"
+      [elementId]="elementID"
       (onEditorContentChange)="handleAnswerText($event)" [preValue]="preValue"
     >
     </app-text-editor>

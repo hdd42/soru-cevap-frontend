@@ -1,20 +1,29 @@
-import {Component, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
+import {Component, HostBinding, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import {QuestionService} from "../../services/question.service";
 import {ActivatedRoute} from "@angular/router";
 import {DomSanitizer} from "@angular/platform-browser";
 import {ModalDirective} from "ng2-bootstrap";
+import {slideInDownAnimation} from '../../animations'
 
 @Component({
   selector: 'app-question-de-tails',
   templateUrl: 'question-de-tails.component.html',
-  styleUrls: ['question-de-tails.component.css']
+  styleUrls: ['question-de-tails.component.css'],
+  animations: [ slideInDownAnimation ]
 })
 export class QuestionDetailsComponent implements OnInit {
   @ViewChild('lgModal') public childModal:ModalDirective;
+  @ViewChild('lgModalEdit') public childModalEdit:ModalDirective;
+
+  /** Animations*/
+
+
+  /** Animations*/
 
   question
   modalTitle =''
   answerToUpdate;
+  formReady =false
   constructor(private qs:QuestionService, private route:ActivatedRoute) {
 
   }
@@ -32,8 +41,8 @@ export class QuestionDetailsComponent implements OnInit {
 
 
   hide(){
-
     this.childModal.hide()
+    this.childModalEdit.hide()
   }
 
   newAnswer(answer){
@@ -51,16 +60,18 @@ export class QuestionDetailsComponent implements OnInit {
     console.log("answer updating...")
     let answer = this.question.answers.filter(_a => _a._id == id)[0]
     this.answerToUpdate = answer
-    console.log(answer)
+    console.log('update : ',answer)
     this.modalTitle= `Guncelleniyor : ${this.question.title}`
-    this.childModal.show()
+    this.formReady = true;
+    this.childModalEdit.show()
   }
 
   answerUpdated(answer){
+    console.log('updated in nn')
     this.question.answers = this.question.answers.map(a => {
       if(a._id ==answer._id) return answer
       return a
     })
-    this.hide()
+    this.childModalEdit.hide()
   }
 }

@@ -1,0 +1,90 @@
+<div class="row">
+
+  <div class="col-md-6" >
+
+    <app-user-layout-box>
+      <div class="xHeader">
+
+        <div class="btn-group">
+          <label class="btn btn-outline-primary" [(ngModel)]="radioModel" btnRadio="Left"
+                 uncheckable>
+              <i class="fa fa-code"></i>
+            En Basarili</label>
+          <label class="btn btn-outline-primary" [(ngModel)]="radioModel" btnRadio="Middle"
+                 uncheckable>
+            <i class="fa fa-heartbeat"></i>
+            En Sevilen</label>
+          <label class="btn btn-outline-primary" [(ngModel)]="radioModel" btnRadio="Right"
+                 uncheckable>
+            <i class="fa fa-exchange"></i>
+            En Begenilmeyen</label>
+        </div>
+      </div>
+
+      <div class="xBody">
+        <form >
+          <div class="form-group">
+            <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">
+          <i class="fa fa-search"></i>
+        </span>
+              <input type="text" class="form-control" placeholder="Kullanici Ara" aria-describedby="ara">
+            </div>
+          </div>
+        </form>
+        <table class="table table-sm table-striped table-hover">
+          <thead>
+          <tr>
+            <th>#</th>
+            <th>Kullanici</th>
+            <th>Soru Sayisi</th>
+            <th>Cevap Sayisi</th>
+            <th>Index Puani</th>
+            <th></th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <tr>
+            <td>1</td>
+            <td>Admin</td>
+            <td>15</td>
+            <td>4</td>
+            <td>45</td>
+            <td>
+              <a href="" routerLink="profile/1">
+                <span class="fa fa-2x fa-arrow-circle-o-right"></span>
+              </a>
+
+            </td>
+          </tr>
+
+          <tr>
+            <td>1</td>
+            <td>Admin</td>
+            <td>15</td>
+            <td>4</td>
+            <td>45</td>
+            <td>
+              <a href="" routerLink="profile/1">
+                <span class="fa fa-2x fa-arrow-circle-o-right"></span>
+              </a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </app-user-layout-box>
+
+
+
+  </div>
+  <div class="col-md-6">
+    <router-outlet>
+
+    </router-outlet>
+  </div>
+
+
+</div>
+

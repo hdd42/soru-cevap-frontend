@@ -29,13 +29,17 @@
 
 
 <app-big-modal bsModal #lgModal="bs-modal" (hideModal)="hide()" [title]="modalTitle">
-  <app-answer-form *ngIf="!answerToUpdate" class="inlineAnswer" [question]="question?._id" (messageAdded)="newAnswer($event)"
-                   [answerInput]="2==3"
+  <app-answer-form [elementId]="'newForm'"  class="inlineAnswer" [question]="question?._id" (messageAdded)="newAnswer($event)"
+                   [answerInput]="answerToUpdate"
                     ></app-answer-form>
-
-  <app-answer-form *ngIf="answerToUpdate" class="inlineAnswer" [question]="question?._id" (messageAdded)="newAnswer($event)" (answerUpdated)="answerUpdated($event)"
-                   [answerInput]="answerToUpdate" ></app-answer-form>
 </app-big-modal>
 
+
+<app-big-modal  bsModal #lgModalEdit="bs-modal" [title]="modalTitle" (hideModal)="hide()" >
+  <app-answer-form [elementId]="'editForm'" class="inlineAnswer" [question]="question?._id"
+                   (messageAdded)="newAnswer($event)" (answerUpdated)="answerUpdated($event)"
+                 *ngIf="answerToUpdate"   [answerInput]="answerToUpdate" (hideModal)="hide()"
+  ></app-answer-form>
+</app-big-modal>
 
 

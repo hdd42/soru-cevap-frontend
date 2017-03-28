@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, HostBinding, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {CategoryService} from "../../services/category.service";
 import {QuestionService} from "../../services/question.service";
+import {slideInDownAnimation} from "../../animations";
 
 @Component({
   selector: 'app-list-category',
@@ -9,6 +10,11 @@ import {QuestionService} from "../../services/question.service";
   styleUrls: ['./list-category.component.css']
 })
 export class ListCategoryQuestions implements OnInit {
+  /** Animations*/
+
+
+  /** Animations*/
+
 
   category
   noAnswerQuestions=[]
